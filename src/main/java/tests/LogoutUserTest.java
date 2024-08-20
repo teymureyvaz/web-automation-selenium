@@ -9,10 +9,10 @@ import pages.HomePage;
 import pages.SignupPage;
 
 
-public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
+public class LogoutUserTest extends BaseTest {
 
-    @Test(priority = 2)
-    public void testLoginUserWithCorrectEmailAndPassword() {
+    @Test(priority = 4)
+    public void testLogoutUser() {
         try {
             HomePage homePage = new HomePage(driver);
             SignupPage signupPage = new SignupPage(driver);
@@ -25,6 +25,10 @@ public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
             signupPage.clickLogin();
             Thread.sleep(2000);
             Assert.assertTrue(signupPage.isLoggedInAsUserVisible(), "Logged in as user is not visible");
+
+            signupPage.clickLogout();
+            Thread.sleep(2000);
+            Assert.assertTrue(signupPage.isLoginToYourAccountVisible(), "Login to your account is not visible");
 
         } catch (NoSuchElementException e) {
             System.out.println("Element not found: " + e.getMessage());

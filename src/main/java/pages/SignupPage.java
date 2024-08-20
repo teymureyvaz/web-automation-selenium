@@ -19,6 +19,8 @@ public class SignupPage {
     private final By accountCreatedText = By.xpath("//h2[.='Account Created!']");
     private final By accountDeletedText = By.xpath("//h2[.='Account Deleted!']");
     private final By loggedInAsUserText = By.xpath("//a[normalize-space(.)='Logged in as John Doe']");
+    private final By yourEmailOrPasswordIsIncorrectText = By.xpath("//p[.='Your email or password is incorrect!']");
+    private final By emailAddressAlreadyExistText = By.xpath("//p[.='Email Address already exist!']");
 
     private final By nameField = By.xpath("//input[@name='name']");
     private final By emailField = By.xpath("//input[@data-qa='signup-email']");
@@ -32,6 +34,7 @@ public class SignupPage {
 
     private final By continueButton = By.xpath("//a[contains(text(),'Continue')]");
     private final By deleteAccountButton = By.xpath("//a[contains(text(),'Delete Account')]");
+    private final By logoutButton = By.xpath("//a[contains(text(),'Logout')]");
 
 
 
@@ -73,23 +76,34 @@ public class SignupPage {
     }
 
     public boolean isAccountCreatedVisible(){
-        WebElement AccountCreatedVisibleText = driver.findElement(accountCreatedText);
-        return AccountCreatedVisibleText.isDisplayed();
+        WebElement accountCreatedVisibleText = driver.findElement(accountCreatedText);
+        return accountCreatedVisibleText.isDisplayed();
     }
 
     public boolean isAccountDeletedVisible(){
-        WebElement AccountDeletedVisibleText = driver.findElement(accountDeletedText);
-        return AccountDeletedVisibleText.isDisplayed();
+        WebElement accountDeletedVisibleText = driver.findElement(accountDeletedText);
+        return accountDeletedVisibleText.isDisplayed();
     }
 
     public boolean isLoginToYourAccountVisible(){
-        WebElement LoginToYourAccountText = driver.findElement(loginToYourAccountText);
-        return LoginToYourAccountText.isDisplayed();
+        WebElement loginToYourAccountVisibleText = driver.findElement(loginToYourAccountText);
+        return loginToYourAccountVisibleText.isDisplayed();
     }
     public boolean isLoggedInAsUserVisible(){
-        WebElement LoggedInAsUserText = driver.findElement(loggedInAsUserText);
-        return LoggedInAsUserText.isDisplayed();
+        WebElement loggedInAsUserVisibleText = driver.findElement(loggedInAsUserText);
+        return loggedInAsUserVisibleText.isDisplayed();
     }
+    public boolean isYourEmailOrPasswordIsIncorrectVisible(){
+        WebElement yourEmailOrPasswordIsIncorrectVisibleText = driver.findElement(yourEmailOrPasswordIsIncorrectText);
+        return yourEmailOrPasswordIsIncorrectVisibleText.isDisplayed();
+    }
+
+    public boolean isEmailAddressAlreadyExistVisible(){
+        WebElement emailAddressAlreadyExistVisibleText = driver.findElement(emailAddressAlreadyExistText);
+        return emailAddressAlreadyExistVisibleText.isDisplayed();
+    }
+
+
 
     public void enterNameAndEmail(String name, String email) {
         driver.findElement(nameField).sendKeys(name);
@@ -110,6 +124,7 @@ public class SignupPage {
 
     public void clickContinue() { driver.findElement(continueButton).click(); }
     public void clickDeleteAccount() { driver.findElement(deleteAccountButton).click(); }
+    public void clickLogout() { driver.findElement(logoutButton).click(); }
 
 
     public void enterAccountInformation(String password, String day, String month, String year) {

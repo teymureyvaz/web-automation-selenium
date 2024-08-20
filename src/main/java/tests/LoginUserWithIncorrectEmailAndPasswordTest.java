@@ -8,11 +8,10 @@ import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.SignupPage;
 
+public class LoginUserWithIncorrectEmailAndPasswordTest extends BaseTest {
 
-public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
-
-    @Test(priority = 2)
-    public void testLoginUserWithCorrectEmailAndPassword() {
+    @Test(priority = 3)
+    public void testLoginUserWithIncorrectEmailAndPassword() {
         try {
             HomePage homePage = new HomePage(driver);
             SignupPage signupPage = new SignupPage(driver);
@@ -21,10 +20,10 @@ public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
             homePage.clickSignupLogin();
 
             Assert.assertTrue(signupPage.isLoginToYourAccountVisible(), "Login to your account is not visible");
-            signupPage.enterEmailAndPassword("tommie.brekke@hotmail.com", "1234567");
+            signupPage.enterEmailAndPassword("test.mail@hotmail.com", "1234567");
             signupPage.clickLogin();
-            Thread.sleep(2000);
-            Assert.assertTrue(signupPage.isLoggedInAsUserVisible(), "Logged in as user is not visible");
+
+            Assert.assertTrue(signupPage.isYourEmailOrPasswordIsIncorrectVisible(), "Your email or password is incorrect is not visible");
 
         } catch (NoSuchElementException e) {
             System.out.println("Element not found: " + e.getMessage());
@@ -33,10 +32,6 @@ public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
         } catch (TimeoutException e) {
             System.out.println("Operation timed out: " + e.getMessage());
             Assert.fail("Test failed due to TimeoutException: " + e.getMessage());
-
-        }  catch (InterruptedException e) {
-            System.out.println("Thread was interrupted: " + e.getMessage());
-            Assert.fail("Test failed due to InterruptedException: " + e.getMessage());
 
         }
     }
