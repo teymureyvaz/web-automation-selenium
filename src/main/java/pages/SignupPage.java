@@ -143,8 +143,7 @@ public class SignupPage {
 
     public void selectNewslettersAndOffers() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1000)");
-
+        js.executeScript("window.scrollBy(0,500)");
         driver.findElement(offersCheckbox).click();
         driver.findElement(newsletterCheckbox).click();
     }
@@ -167,7 +166,9 @@ public class SignupPage {
         driver.findElement(mobileNumberField).sendKeys(mobileNumber);
     }
 
-    public void clickCreateAccount() {
+    public void clickCreateAccount()  {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,200)");
         driver.findElement(createAccountButton).click();
     }
 }
