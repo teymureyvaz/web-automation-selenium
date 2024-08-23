@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.ProductsPage;
+import pages.ProductDetailsPage;
 
 
 public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
@@ -16,6 +17,7 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
         try {
             HomePage homePage = new HomePage(driver);
             ProductsPage productsPage = new ProductsPage(driver);
+            ProductDetailsPage productDetailsPage = new ProductDetailsPage(driver);
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickProducts();
@@ -28,6 +30,12 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
             Thread.sleep(3000);
             productsPage.clickViewProduct();
 
+            Assert.assertTrue(productDetailsPage.isProductNameVisible(), "Product list div is not visible");
+            Assert.assertTrue(productDetailsPage.isProductCategoryVisible(), "Product list div is not visible");
+            Assert.assertTrue(productDetailsPage.isProductPriceVisible(), "Product list div is not visible");
+            Assert.assertTrue(productDetailsPage.isProductAvailabilityVisible(), "Product list div is not visible");
+            Assert.assertTrue(productDetailsPage.isProductConditionVisible(), "Product list div is not visible");
+            Assert.assertTrue(productDetailsPage.isProductBrandVisible(), "Product list div is not visible");
 
         } catch (NoSuchElementException e) {
             System.out.println("Element not found: " + e.getMessage());
