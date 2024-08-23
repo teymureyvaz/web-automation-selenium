@@ -18,18 +18,18 @@ public class ProductsPage {
 
 
     public boolean isProductsVisible() {
-                    WebElement productsDivElement = driver.findElement(productsDiv);
-                    return productsDivElement.isDisplayed();
-                }
+        WebElement productsDivElement = driver.findElement(productsDiv);
+        return productsDivElement.isDisplayed();
+    }
 
-                public boolean isProductListDivVisible() {
-                    WebElement productListDiv = driver.findElement(productsListDiv);
-                    return productListDiv.isDisplayed();
-                }
+    public boolean isProductListDivVisible() {
+        WebElement productListDiv = driver.findElement(productsListDiv);
+        return productListDiv.isDisplayed();
+    }
 
-                private final By viewProductButton = By.xpath("//a[@href='/product_details/1']");
+    private final By viewProductButton = By.xpath("//a[@href='/product_details/1']");
 
-                public void clickViewProduct() {
+    public void clickViewProduct() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,1000)");
         driver.findElement(viewProductButton).click();
