@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.ProductsPage;
+import utils.ScrollUtils;
 import pages.ProductDetailsPage;
 
 
@@ -28,7 +29,9 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
             Assert.assertTrue(productsPage.isProductListDivVisible(), "Product list div is not visible");
 
             Thread.sleep(3000);
-            productsPage.clickViewProduct();
+
+            ScrollUtils.scrollTo(driver,1000);
+            productsPage.clickViewProduct("1");
 
             Assert.assertTrue(productDetailsPage.isProductNameVisible(), "Product list div is not visible");
             Assert.assertTrue(productDetailsPage.isProductCategoryVisible(), "Product list div is not visible");

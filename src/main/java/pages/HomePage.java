@@ -13,6 +13,7 @@ public class HomePage {
     private final By testCasesButton = By.xpath("//a[contains(text(),'Test Cases')]");
 
     private final By productsButton = By.xpath("//a[contains(text(),'Products')]");
+    private final By cartButton = By.xpath("//a[contains(text(),'Cart')]");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -31,6 +32,7 @@ public class HomePage {
     }
     public void clickTestCases() {driver.findElement(testCasesButton).click(); }
     public void clickProducts() {driver.findElement(productsButton).click(); }
+    public void clickCart() {driver.findElement(cartButton).click(); }
 
     }
 
