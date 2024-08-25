@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.ProductsPage;
+import utils.ScrollUtils;
 
 
 public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
@@ -26,7 +27,9 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
             Assert.assertTrue(productsPage.isProductListDivVisible(), "Product list div is not visible");
 
             Thread.sleep(3000);
-            productsPage.clickViewProduct();
+
+            ScrollUtils.scrollTo(driver,1000);
+            productsPage.clickViewProduct("1");
 
 
         } catch (NoSuchElementException e) {

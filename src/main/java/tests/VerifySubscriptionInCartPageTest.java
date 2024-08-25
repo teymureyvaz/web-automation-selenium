@@ -1,3 +1,4 @@
+
 package tests;
 
 import base.BaseTest;
@@ -5,40 +6,31 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.ContactUsPage;
+import pages.CartPage;
 import pages.HomePage;
 import utils.ScrollUtils;
 
-import java.io.File;
 
+public class VerifySubscriptionInCartPageTest extends BaseTest {
 
-public class ContactUsFormTest extends BaseTest {
-
-    @Test(priority = 6)
-    public void testContactUsForm() {
+    @Test(priority = 11)
+    public void testVerifySubscriptionInCartPage() {
         try {
             HomePage homePage = new HomePage(driver);
-            ContactUsPage contactUsPage = new ContactUsPage(driver);
+            CartPage cartPage = new CartPage(driver);
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
-            homePage.clickContactUs();
 
+            homePage.clickCart();
+
+            ScrollUtils.scrollToFooter(driver);
+            Assert.assertTrue(cartPage.isSubscriptionTextVisible(), "Subscription text is not visible");
+
+            cartPage.enterEmail("test@mail.com");
+            cartPage.clickSubscribe();
             Thread.sleep(1000);
-            Assert.assertTrue(contactUsPage.isGetInTouchVisible(), "Get in touch is not visible");
-            Thread.sleep(1000);
 
-            contactUsPage.enterNameAndEmail("Teymur", "teymureyvazov@outlook.com");
-            contactUsPage.enterSubjectAndMessage("Recommendations", "Test message");
-
-            File file = new File("src/main/resources/test-files/test-txt-for-upload.txt");
-            contactUsPage.uploadFile(file.getAbsolutePath());
-
-            ScrollUtils.scrollTo(driver,200);
-            contactUsPage.clickSubmit();
-
-            driver.switchTo().alert().accept();
-            Thread.sleep(1000);
-            Assert.assertTrue(contactUsPage.isSuccessfullySubmittedVisible(), "Successfully submitted is not visible");
+            Assert.assertTrue(cartPage.isSuccessfullySubscribedTextVisible(),"Successfully subscribed text is not visible");
 
         } catch (NoSuchElementException e) {
             System.out.println("Element not found: " + e.getMessage());

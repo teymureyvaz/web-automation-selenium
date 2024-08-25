@@ -9,6 +9,7 @@ import pages.HomePage;
 import pages.SignupPage;
 
 import com.github.javafaker.Faker;
+import utils.ScrollUtils;
 
 
 public class RegisterUserTest extends BaseTest {
@@ -31,8 +32,10 @@ public class RegisterUserTest extends BaseTest {
             Assert.assertTrue(signupPage.isEnterAccountInformationVisible(), "Enter Account Information is not visible");
 
             signupPage.enterAccountInformation("1234567", "6", "5", "1996");
+            ScrollUtils.scrollTo(driver,500);
             signupPage.selectNewslettersAndOffers();
             signupPage.enterAddressDetails("Teymur", "Eyvzov", "ABB", "Rixard Zorge 12a", "", "Canada", "Baku", "Baku", "1000", "994775569147");
+            ScrollUtils.scrollTo(driver,200);
             signupPage.clickCreateAccount();
             Assert.assertTrue(signupPage.isAccountCreatedVisible(), "Account Created text is not visible");
             Thread.sleep(2000);

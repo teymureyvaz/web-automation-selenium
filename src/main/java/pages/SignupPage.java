@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -142,8 +141,6 @@ public class SignupPage {
     }
 
     public void selectNewslettersAndOffers() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,500)");
         driver.findElement(offersCheckbox).click();
         driver.findElement(newsletterCheckbox).click();
     }
@@ -167,8 +164,6 @@ public class SignupPage {
     }
 
     public void clickCreateAccount()  {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,200)");
         driver.findElement(createAccountButton).click();
     }
 }
