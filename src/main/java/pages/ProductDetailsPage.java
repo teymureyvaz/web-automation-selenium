@@ -15,9 +15,17 @@ public class ProductDetailsPage {
     private final By productCondition = By.xpath("//div[@class='product-information']/p/b[contains(text(),'Condition')]");
     private final By productBrand = By.xpath("//div[@class='product-information']/p/b[contains(text(),'Brand')]");
 
+
+    private final By quantityField = By.xpath("//input[@id='quantity']");
+    private final By viewCartButton = By.xpath("//a[contains(., 'View Cart')]");
+
+    private final By addToCartButton = By.xpath("//button[contains(., 'Add to cart')]");
+
+
     public ProductDetailsPage(WebDriver driver) {
         this.driver = driver;
     }
+
 
     public boolean isProductNameVisible() {
         WebElement productNameField = driver.findElement(productName);
@@ -48,6 +56,21 @@ public class ProductDetailsPage {
         WebElement productBrandField = driver.findElement(productBrand);
         return productBrandField.isDisplayed();
     }
+
+    public void enterQuantity(String quantity){
+        WebElement quantityFieldUpdate = driver.findElement(quantityField);
+        quantityFieldUpdate.clear();
+        quantityFieldUpdate.sendKeys(quantity);
+    }
+
+    public  void clickAddToCartButton(){
+        driver.findElement(addToCartButton).click();
+    }
+
+    public void clickViewCartButton() {
+        driver.findElement(viewCartButton).click();
+    }
+
 
 }
 
