@@ -14,7 +14,6 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import io.github.bonigarcia.wdm.WebDriverManager;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -45,7 +44,7 @@ public class BaseTest {
     public void setUp(ITestResult result) {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
+        options.addArguments("--remote-allow-origins=*", "ignore-certificate-errors");
 
         WebDriver webDriver = new ChromeDriver(options);
         webDriver.manage().window().maximize();
@@ -58,6 +57,7 @@ public class BaseTest {
 
         test.get().log(Status.INFO, "Test setup completed");
     }
+
 
     protected WebDriver getDriver() {
         return driver.get();
