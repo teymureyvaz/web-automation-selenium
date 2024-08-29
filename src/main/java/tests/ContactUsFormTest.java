@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import pages.ContactUsPage;
 import pages.HomePage;
 import utils.ScrollUtils;
-
 import java.io.File;
 
 
@@ -17,9 +16,10 @@ public class ContactUsFormTest extends BaseTest {
     @Test(priority = 6)
     public void testContactUsForm() {
         try {
-            HomePage homePage = new HomePage(getDriver());
-            ContactUsPage contactUsPage = new ContactUsPage(getDriver());
+            HomePage homePage = new HomePage(driver);
+            ContactUsPage contactUsPage = new ContactUsPage(driver);
 
+            test.info("Verifying if home page is visible ");
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickContactUs();
 
@@ -33,10 +33,10 @@ public class ContactUsFormTest extends BaseTest {
             File file = new File("src/main/resources/test-files/test-txt-for-upload.txt");
             contactUsPage.uploadFile(file.getAbsolutePath());
 
-            ScrollUtils.scrollTo(getDriver(),200);
+            ScrollUtils.scrollTo(driver,200);
             contactUsPage.clickSubmit();
 
-            getDriver().switchTo().alert().accept();
+            driver.switchTo().alert().accept();
             Thread.sleep(1000);
             Assert.assertTrue(contactUsPage.isSuccessfullySubmittedVisible(), "Successfully submitted is not visible");
 
