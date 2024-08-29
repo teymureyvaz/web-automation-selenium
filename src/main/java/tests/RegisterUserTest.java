@@ -18,8 +18,8 @@ public class RegisterUserTest extends BaseTest {
 
     public void testRegisterUser() {
         try {
-            HomePage homePage = new HomePage(getDriver());
-            SignupPage signupPage = new SignupPage(getDriver());
+            HomePage homePage = new HomePage(driver);
+            SignupPage signupPage = new SignupPage(driver);
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickSignupLogin();
@@ -33,10 +33,10 @@ public class RegisterUserTest extends BaseTest {
             Assert.assertTrue(signupPage.isEnterAccountInformationVisible(), "Enter Account Information is not visible");
 
             signupPage.enterAccountInformation("1234567", "6", "5", "1996");
-            ScrollUtils.scrollTo(getDriver(),500);
+            ScrollUtils.scrollTo(driver,500);
             signupPage.selectNewslettersAndOffers();
             signupPage.enterAddressDetails("Teymur", "Eyvzov", "ABB", "Rixard Zorge 12a", "", "Canada", "Baku", "Baku", "1000", "994775569147");
-            ScrollUtils.scrollTo(getDriver(),200);
+            ScrollUtils.scrollTo(driver,200);
             signupPage.clickCreateAccount();
             Assert.assertTrue(signupPage.isAccountCreatedVisible(), "Account Created text is not visible");
             Thread.sleep(2000);
