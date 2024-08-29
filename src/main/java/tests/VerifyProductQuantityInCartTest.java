@@ -7,40 +7,34 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.HomePage;
-import pages.ProductsPage;
-
+import pages.ProductDetailsPage;
 import utils.ScrollUtils;
 
 
-public class AddProductInCartTest extends BaseTest {
+public class VerifyProductQuantityInCartTest extends BaseTest {
 
-    @Test(priority = 12)
-    public void testAddProductInCart() {
+    @Test(priority = 13)
+    public void testVerifyProductQuantityInCartTest() {
         try {
             HomePage homePage = new HomePage(getDriver());
-            ProductsPage productsPage = new ProductsPage(getDriver());
+            ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
             CartPage cartPage = new CartPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
+            ScrollUtils.scrollTo(getDriver(), 600);
 
-            ScrollUtils.scrollTo(getDriver(),500);
+            homePage.clickViewProduct("2");
+            String currentUrl = getDriver().getCurrentUrl();
+            Assert.assertEquals(currentUrl, "https://automationexercise.com/product_details/2", "Expected URL: " + "product_details/1" + " but got: " + currentUrl);
 
+            productDetailsPage.enterQuantity("4");
             Thread.sleep(1000);
 
-            // adding first product
-            productsPage.addProductToCard("1");
-            Thread.sleep(1000);
-            productsPage.clickContinueShoppingButton();
+            productDetailsPage.clickAddToCartButton();
+            Thread.sleep(2000);
 
-            // adding second product
-            productsPage.addProductToCard("2");
-            Thread.sleep(1000);
-            productsPage.clickViewCartButton();
-
-            Thread.sleep(1000);
-
+            productDetailsPage.clickViewCartButton();
             Assert.assertTrue(cartPage.isProductInCart("Men Tshirt"), "Men Tshirt is not in the cart");
-            Assert.assertTrue(cartPage.isProductInCart("Blue Top"), "Blue Top is not in the cart");
 
             // verify product details for "Men Tshirt"
             String nameTshirt = cartPage.getProductName("2");
@@ -50,19 +44,8 @@ public class AddProductInCartTest extends BaseTest {
 
             Assert.assertEquals(nameTshirt, "Men Tshirt", "Men Tshirt name is incorrect");
             Assert.assertEquals(priceTshirt, "Rs. 400", "Men Tshirt price is incorrect");
-            Assert.assertEquals(quantityTshirt, "1", "Men Tshirt quantity is incorrect");
-            Assert.assertEquals(totalTshirt, "Rs. 400", "Men Tshirt total is incorrect");
-
-            // verify product details for "Blue Top
-            String nameTop = cartPage.getProductName("1");
-            String priceTop = cartPage.getProductPrice("1");
-            String quantityTop = cartPage.getProductQuantity("1");
-            String totalTop = cartPage.getProductTotal("1");
-
-            Assert.assertEquals(nameTop, "Blue Top", "Blue Top name is incorrect");
-            Assert.assertEquals(priceTop, "Rs. 500", "Blue Top price is incorrect");
-            Assert.assertEquals(quantityTop, "1", "Blue Top quantity is incorrect");
-            Assert.assertEquals(totalTop, "Rs. 500", "Blue Top total is incorrect");
+            Assert.assertEquals(quantityTshirt, "4", "Men Tshirt quantity is incorrect");
+            Assert.assertEquals(totalTshirt, "Rs. 1600", "Men Tshirt total is incorrect");
 
 
         } catch (NoSuchElementException e) {
@@ -73,10 +56,10 @@ public class AddProductInCartTest extends BaseTest {
             System.out.println("Operation timed out: " + e.getMessage());
             Assert.fail("Test failed due to TimeoutException: " + e.getMessage());
 
+
         } catch (InterruptedException e) {
             System.out.println("Thread was interrupted: " + e.getMessage());
             Assert.fail("Test failed due to InterruptedException: " + e.getMessage());
-
         }
     }
 }

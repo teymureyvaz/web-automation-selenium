@@ -10,11 +10,15 @@ public class CartPage {
     private final By subscriptionText = By.xpath("//h2[contains(text(),'Subscription')]");
     private final By successfullySubscribedText = By.xpath("//div[contains(text(),'You have been successfully subscribed!')]");
 
+
+
     private final By emailField = By.id("susbscribe_email");
 
     private final By subscribeButton = By.xpath("//button[@id='subscribe']");
+    private final By proceedToCheckoutButton = By.xpath("//a[contains(text(),'Proceed To Checkout')]");
+    private final By registerLoginButton = By.xpath("//a[.='Register / Login']");
 
-
+    
     public boolean isProductInCart(String productName) {
         return !driver.findElements(By.xpath("//a[text()='" + productName + "']")).isEmpty();
     }
@@ -78,5 +82,14 @@ public class CartPage {
     public void clickSubscribe(){
         driver.findElement(subscribeButton).click();
     }
+    public void clickProceedToCheckoutButton(){
+        driver.findElement(proceedToCheckoutButton).click();
+    }
+
+    public void clickRegisterLoginButton(){
+        driver.findElement(registerLoginButton).click();
+    }
+
+
 
 }

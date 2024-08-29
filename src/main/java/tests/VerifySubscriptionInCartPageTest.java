@@ -16,14 +16,15 @@ public class VerifySubscriptionInCartPageTest extends BaseTest {
     @Test(priority = 11)
     public void testVerifySubscriptionInCartPage() {
         try {
-            HomePage homePage = new HomePage(driver);
-            CartPage cartPage = new CartPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            CartPage cartPage = new CartPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
 
             homePage.clickCart();
 
-            ScrollUtils.scrollToFooter(driver);
+            ScrollUtils.scrollToFooter(getDriver());
+
             Assert.assertTrue(cartPage.isSubscriptionTextVisible(), "Subscription text is not visible");
 
             cartPage.enterEmail("test@mail.com");

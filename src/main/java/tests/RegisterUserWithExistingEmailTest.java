@@ -15,8 +15,8 @@ public class RegisterUserWithExistingEmailTest extends BaseTest {
     @Test(priority = 5)
     public void testRegisterWithExistingEmail() {
         try {
-            HomePage homePage = new HomePage(driver);
-            SignupPage signupPage = new SignupPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            SignupPage signupPage = new SignupPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickSignupLogin();

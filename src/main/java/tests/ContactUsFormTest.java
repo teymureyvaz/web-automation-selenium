@@ -17,8 +17,8 @@ public class ContactUsFormTest extends BaseTest {
     @Test(priority = 6)
     public void testContactUsForm() {
         try {
-            HomePage homePage = new HomePage(driver);
-            ContactUsPage contactUsPage = new ContactUsPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            ContactUsPage contactUsPage = new ContactUsPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickContactUs();
@@ -33,10 +33,10 @@ public class ContactUsFormTest extends BaseTest {
             File file = new File("src/main/resources/test-files/test-txt-for-upload.txt");
             contactUsPage.uploadFile(file.getAbsolutePath());
 
-            ScrollUtils.scrollTo(driver,200);
+            ScrollUtils.scrollTo(getDriver(),200);
             contactUsPage.clickSubmit();
 
-            driver.switchTo().alert().accept();
+            getDriver().switchTo().alert().accept();
             Thread.sleep(1000);
             Assert.assertTrue(contactUsPage.isSuccessfullySubmittedVisible(), "Successfully submitted is not visible");
 

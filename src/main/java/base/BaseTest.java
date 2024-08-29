@@ -18,12 +18,10 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-
 public class BaseTest {
-    protected WebDriver driver;
-    protected static ExtentReports extent;
-    protected ExtentTest test;
+    private static ThreadLocal<WebDriver> driver = new ThreadLocal<>();
+    private static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    private static ExtentReports extent;
 
     @BeforeSuite
     public void setupExtent() {
@@ -39,7 +37,7 @@ public class BaseTest {
             extent.attachReporter(htmlReporter);
             extent.setSystemInfo("Host Name", "localhost");
             extent.setSystemInfo("Environment", "Automation Testing");
-            extent.setSystemInfo("User Name", "Teymur Eyvazov");
+            extent.setSystemInfo("User Name", "Your Name");
         }
     }
 
@@ -49,37 +47,50 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*","ignore-certificate-errors");
 
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();
-        driver.get("http://automationexercise.com");
+        WebDriver webDriver = new ChromeDriver(options);
+        webDriver.manage().window().maximize();
+        webDriver.get("http://automationexercise.com");
 
-        test = extent.createTest(result.getMethod().getMethodName());
-        test.log(Status.INFO, "Test setup completed");
+        driver.set(webDriver);
+
+        ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName());
+        test.set(extentTest);
+
+        test.get().log(Status.INFO, "Test setup completed");
+    }
+
+    protected WebDriver getDriver() {
+        return driver.get();
+    }
+
+    protected ExtentTest getTest() {
+        return test.get();
     }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
-
         if (result.getStatus() == ITestResult.FAILURE) {
-            test.log(Status.FAIL, "Test Failed: " + result.getName());
-            test.log(Status.FAIL, "Reason: " + result.getThrowable());
+            getTest().log(Status.FAIL, "Test Failed: " + result.getName());
+            getTest().log(Status.FAIL, "Reason: " + result.getThrowable());
         } else if (result.getStatus() == ITestResult.SUCCESS) {
-            test.log(Status.PASS, "Test Passed: " + result.getName());
+            getTest().log(Status.PASS, "Test Passed: " + result.getName());
         } else if (result.getStatus() == ITestResult.SKIP) {
-            test.log(Status.SKIP, "Test Skipped: " + result.getName());
+            getTest().log(Status.SKIP, "Test Skipped: " + result.getName());
         }
 
-
-        if (driver != null) {
-            driver.quit();
-            test.log(Status.INFO, "Browser closed");
+        if (getDriver() != null) {
+            getDriver().quit();
+            getTest().log(Status.INFO, "Browser closed");
+            driver.remove();
         }
+
+        test.remove();
     }
 
-    @AfterSuite
+    @AfterSuite(alwaysRun = true)
     public void tearDownExtent() {
         if (extent != null) {
-            extent.flush();
+            extent.flush();  // Only flush the report once after all tests are completed
         }
     }
 }
