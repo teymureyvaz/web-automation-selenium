@@ -1,9 +1,14 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class HomePage {
 
@@ -16,42 +21,106 @@ public class HomePage {
 
     private final By productsButton = By.xpath("//a[contains(text(),'Products')]");
     private final By cartButton = By.xpath("//a[contains(text(),'Cart')]");
+    private final By subscriptionText = By.xpath("//h2[contains(text(),'Subscription')]");
+    private final By viewYourEmailAddress = By.xpath("//input[@id='susbscribe_email']");
+    private final By emailField = By.xpath("//input[@id='susbscribe_email']");
+    private final By viewArrowButton = By.xpath("//button[@id='subscribe']");
+
+    private final By youHaveBeenSuccessfullySubscribedText = By.xpath("//div[@class='alert-success alert' and text()='You have been successfully subscribed!']");
+
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
     }
+
+    public void enterEmail(String email) {
+        driver.findElement(emailField).sendKeys(email);
+    }
+
 
     public boolean isHomePageVisible() {
         WebElement logo = driver.findElement(homePageLogo);
         return logo.isDisplayed();
     }
 
+    public boolean isSubscriptionTextVisible() {
+        WebElement subscriptionTextVisible = driver.findElement(subscriptionText);
+        return subscriptionTextVisible.isDisplayed();
+    }
+
+    public boolean isYouHaveBeenSuccessfullySubscribedTextVisible() {
+        WebElement youHaveBeenSuccessfullySubscribedTextVisible = driver.findElement(youHaveBeenSuccessfullySubscribedText);
+        return youHaveBeenSuccessfullySubscribedTextVisible.isDisplayed();
+    }
+
     public void clickSignupLogin() {
         driver.findElement(signupLoginButton).click();
     }
+
     public void clickContactUs() {
         driver.findElement(contactUsButton).click();
     }
-    public void clickTestCases() {driver.findElement(testCasesButton).click(); }
-    public void clickProducts() {driver.findElement(productsButton).click(); }
-    public void clickCart() {driver.findElement(cartButton).click(); }
+
+    public void clickTestCases() {
+        driver.findElement(testCasesButton).click();
+    }
+
+    public void clickProducts() {
+        driver.findElement(productsButton).click();
+    }
+
+    public void clickCart() {
+        driver.findElement(cartButton).click();
+    }
 
     public void clickViewProduct(String productId) {
-        driver.findElement(By.xpath("//a[@href='/product_details/"+ productId +"']")).click();
+        driver.findElement(By.xpath("//a[@href='/product_details/" + productId + "']")).click();
     }
+
     public void clickContinueShoppingButton() {
         driver.findElement(continueShoppingButton).click();
     }
 
+    public void clickYourEmailAddress() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        driver.findElement(viewYourEmailAddress).click();
+
+    }
+
+    public void clickArrowButton() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        driver.findElement(viewArrowButton).click();
+
+    }
+
     public void addProductToCard(String productIndex) throws InterruptedException {
         Actions actions = new Actions(driver);
-        WebElement productDivToHover = driver.findElement(By.xpath("//a[@data-product-id='"+ productIndex +"']/parent::*/parent::*"));
-        WebElement productAddToCartButton = driver.findElement(By.xpath("//div[contains(@class, 'product-overlay')]//a[@data-product-id='"+ productIndex +"']"));
+        WebElement productDivToHover = driver.findElement(By.xpath("//a[@data-product-id='" + productIndex + "']/parent::*/parent::*"));
+        WebElement productAddToCartButton = driver.findElement(By.xpath("//div[contains(@class, 'product-overlay')]//a[@data-product-id='" + productIndex + "']"));
         actions.moveToElement(productDivToHover).perform();
         Thread.sleep(1000);
         productAddToCartButton.click();
     }
 
+
+    private final By viewUpwardArrowButton = By.xpath("//a[@id='scrollUp']");
+
+    public void clickUpwardArrowButton() {
+        driver.findElement(viewUpwardArrowButton).click();
+
+    }
+
+    private final By fullFledgedPracticeWebsiteForAutomationEngineersText = By.xpath("//h2[text()='Full-Fledged practice website for Automation Engineers']");
+
+    public boolean isFullFledgedPracticeWebsiteForAutomationEngineersTextVisible() {
+        WebElement fullFledgedPracticeWebsiteForAutomationEngineersTextVisible = driver.findElement(fullFledgedPracticeWebsiteForAutomationEngineersText);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(fullFledgedPracticeWebsiteForAutomationEngineersText));
+
+
+        return fullFledgedPracticeWebsiteForAutomationEngineersTextVisible.isDisplayed();
+    }
 
 }
 
