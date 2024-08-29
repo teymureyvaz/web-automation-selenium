@@ -21,10 +21,23 @@ tasks.register('runSeleniumTests', Test) {
     description = 'Runs the Selenium tests in the main folder.'
     group = 'verification'
 
+    // Set the test sources and classpath
     testClassesDirs = sourceSets.main.output.classesDirs
     classpath = sourceSets.main.runtimeClasspath
 
-    useTestNG()
+    // Use TestNG for testing
+    useTestNG() {
+        // Set parallel execution strategy at the TestNG level
+        parallel = 'methods'  // You can choose 'methods', 'classes', or 'both'
+    }
+
+    // Get the number of available CPU cores
+    int cores = Runtime.runtime.availableProcessors()
+
+    // Set the maximum parallel forks to the number of CPU cores
+    maxParallelForks = cores
+
+    // Test logging to show results in the console
     testLogging {
         events "passed", "skipped", "failed"
     }

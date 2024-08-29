@@ -16,9 +16,9 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
     @Test(priority = 8)
     public void testVerifyAllProductsAndProductDetailPage() {
         try {
-            HomePage homePage = new HomePage(driver);
-            ProductsPage productsPage = new ProductsPage(driver);
-            ProductDetailsPage productDetailsPage = new ProductDetailsPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            ProductsPage productsPage = new ProductsPage(getDriver());
+            ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickProducts();
@@ -30,7 +30,7 @@ public class VerifyAllProductsAndProductDetailPageTest extends BaseTest {
 
             Thread.sleep(3000);
 
-            ScrollUtils.scrollTo(driver,1000);
+            ScrollUtils.scrollTo(getDriver(),1000);
             productsPage.clickViewProduct("1");
 
             Assert.assertTrue(productDetailsPage.isProductNameVisible(), "Product list div is not visible");

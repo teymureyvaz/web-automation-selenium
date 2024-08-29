@@ -16,15 +16,15 @@ public class VerifyProductQuantityInCartTest extends BaseTest {
     @Test(priority = 13)
     public void testVerifyProductQuantityInCartTest() {
         try {
-            HomePage homePage = new HomePage(driver);
-            ProductDetailsPage productDetailsPage = new ProductDetailsPage(driver);
-            CartPage cartPage = new CartPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            ProductDetailsPage productDetailsPage = new ProductDetailsPage(getDriver());
+            CartPage cartPage = new CartPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
-            ScrollUtils.scrollTo(driver, 600);
+            ScrollUtils.scrollTo(getDriver(), 600);
 
             homePage.clickViewProduct("2");
-            String currentUrl = driver.getCurrentUrl();
+            String currentUrl = getDriver().getCurrentUrl();
             Assert.assertEquals(currentUrl, "https://automationexercise.com/product_details/2", "Expected URL: " + "product_details/1" + " but got: " + currentUrl);
 
             productDetailsPage.enterQuantity("4");

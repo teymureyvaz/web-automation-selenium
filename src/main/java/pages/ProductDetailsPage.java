@@ -63,7 +63,7 @@ public class ProductDetailsPage {
         quantityFieldUpdate.sendKeys(quantity);
     }
 
-    public  void clickAddToCartButton(){
+    public void clickAddToCartButton(){
         driver.findElement(addToCartButton).click();
     }
 

@@ -9,14 +9,13 @@ import pages.HomePage;
 import pages.TestCasesPage;
 
 
-
 public class VerifyTestCasesPageTest extends BaseTest {
 
     @Test(priority = 7)
     public void testVerifyTestCasesPage() {
         try {
-            HomePage homePage = new HomePage(driver);
-            TestCasesPage testCasesPage = new TestCasesPage(driver);
+            HomePage homePage = new HomePage(getDriver());
+            TestCasesPage testCasesPage = new TestCasesPage(getDriver());
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickTestCases();

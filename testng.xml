@@ -1,0 +1,7 @@
+<suite name="MyTestSuite" parallel="methods" thread-count="20">
+    <test name="MyTests">
+        <classes>
+            <class name="src.main.java.tests.LogoutUserTest"/>
+        </classes>
+    </test>
+</suite>
