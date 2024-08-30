@@ -10,10 +10,10 @@ import utils.AdUtils;
 import utils.ScrollUtils;
 
 
-public class VerifyUpAndDownFunctionalityTest extends BaseTest {
+public class VerifyUpWithArrowAndDownFunctionalityTest extends BaseTest {
 
     @Test(priority = 25)
-    public void testVerifyUpAndDownFunctionality() {
+    public void testVerifyUpWithArrowAndDownFunctionality() {
         try {
             HomePage homePage = new HomePage(getDriver());
 
@@ -53,6 +53,8 @@ public class VerifyUpAndDownFunctionalityTest extends BaseTest {
 
         }
     }
+
+
 }
 
 

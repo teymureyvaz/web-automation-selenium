@@ -21,7 +21,7 @@ public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
             homePage.clickSignupLogin();
 
             Assert.assertTrue(signupPage.isLoginToYourAccountVisible(), "Login to your account is not visible");
-            signupPage.enterEmailAndPassword("tommie.brekke@hotmail.com", "1234567");
+            signupPage.enterEmailAndPassword("walterwhite@gmail.com", "12345678");
             signupPage.clickLogin();
             Thread.sleep(2000);
             Assert.assertTrue(signupPage.isLoggedInAsUserVisible(), "Logged in as user is not visible");
@@ -34,7 +34,7 @@ public class LoginUserWithCorrectEmailAndPasswordTest extends BaseTest {
             System.out.println("Operation timed out: " + e.getMessage());
             Assert.fail("Test failed due to TimeoutException: " + e.getMessage());
 
-        }  catch (InterruptedException e) {
+        } catch (InterruptedException e) {
             System.out.println("Thread was interrupted: " + e.getMessage());
             Assert.fail("Test failed due to InterruptedException: " + e.getMessage());
 

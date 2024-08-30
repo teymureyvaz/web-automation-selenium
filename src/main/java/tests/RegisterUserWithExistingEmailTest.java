@@ -9,7 +9,6 @@ import pages.HomePage;
 import pages.SignupPage;
 
 
-
 public class RegisterUserWithExistingEmailTest extends BaseTest {
 
     @Test(priority = 5)
@@ -24,7 +23,7 @@ public class RegisterUserWithExistingEmailTest extends BaseTest {
             Assert.assertTrue(signupPage.isNewUserSignupVisible(), "New User Signup is not visible");
 
 
-            signupPage.enterNameAndEmail("Test Name", "tommie.brekke@hotmail.com");
+            signupPage.enterNameAndEmail("Test Name", "walterwhite@gmail.com");
             signupPage.clickSignup();
             Assert.assertTrue(signupPage.isEmailAddressAlreadyExistVisible(), "Email address already exist is not visible");
 
