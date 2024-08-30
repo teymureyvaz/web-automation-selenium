@@ -51,10 +51,10 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get("http://automationexercise.com");
-      
+
         test = extent.createTest(result.getMethod().getMethodName());
         test.log(Status.INFO, "Test setup completed");
-
+    }
 
     @AfterMethod
     public void tearDown(ITestResult result) {
