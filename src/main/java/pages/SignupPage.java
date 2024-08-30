@@ -17,7 +17,7 @@ public class SignupPage {
     private final By enterAccountInformationText = By.xpath("//h2[.='Enter Account Information']");
     private final By accountCreatedText = By.xpath("//h2[.='Account Created!']");
     private final By accountDeletedText = By.xpath("//h2[.='Account Deleted!']");
-    private final By loggedInAsUserText = By.xpath("//a[normalize-space(.)='Logged in as John Doe']");
+    private final By loggedInAsUserText = By.xpath("//a[contains(text(),'Logged in as')]");
     private final By yourEmailOrPasswordIsIncorrectText = By.xpath("//p[.='Your email or password is incorrect!']");
     private final By emailAddressAlreadyExistText = By.xpath("//p[.='Email Address already exist!']");
 
@@ -34,7 +34,6 @@ public class SignupPage {
     private final By continueButton = By.xpath("//a[contains(text(),'Continue')]");
     private final By deleteAccountButton = By.xpath("//a[contains(text(),'Delete Account')]");
     private final By logoutButton = By.xpath("//a[contains(text(),'Logout')]");
-
 
 
     private final By titleMr = By.id("id_gender1");
@@ -69,39 +68,40 @@ public class SignupPage {
         return signupText.isDisplayed();
     }
 
-    public boolean isEnterAccountInformationVisible(){
+    public boolean isEnterAccountInformationVisible() {
         WebElement enterAccountInfoVisibleText = driver.findElement(enterAccountInformationText);
         return enterAccountInfoVisibleText.isDisplayed();
     }
 
-    public boolean isAccountCreatedVisible(){
+    public boolean isAccountCreatedVisible() {
         WebElement accountCreatedVisibleText = driver.findElement(accountCreatedText);
         return accountCreatedVisibleText.isDisplayed();
     }
 
-    public boolean isAccountDeletedVisible(){
+    public boolean isAccountDeletedVisible() {
         WebElement accountDeletedVisibleText = driver.findElement(accountDeletedText);
         return accountDeletedVisibleText.isDisplayed();
     }
 
-    public boolean isLoginToYourAccountVisible(){
+    public boolean isLoginToYourAccountVisible() {
         WebElement loginToYourAccountVisibleText = driver.findElement(loginToYourAccountText);
         return loginToYourAccountVisibleText.isDisplayed();
     }
-    public boolean isLoggedInAsUserVisible(){
+
+    public boolean isLoggedInAsUserVisible() {
         WebElement loggedInAsUserVisibleText = driver.findElement(loggedInAsUserText);
         return loggedInAsUserVisibleText.isDisplayed();
     }
-    public boolean isYourEmailOrPasswordIsIncorrectVisible(){
+
+    public boolean isYourEmailOrPasswordIsIncorrectVisible() {
         WebElement yourEmailOrPasswordIsIncorrectVisibleText = driver.findElement(yourEmailOrPasswordIsIncorrectText);
         return yourEmailOrPasswordIsIncorrectVisibleText.isDisplayed();
     }
 
-    public boolean isEmailAddressAlreadyExistVisible(){
+    public boolean isEmailAddressAlreadyExistVisible() {
         WebElement emailAddressAlreadyExistVisibleText = driver.findElement(emailAddressAlreadyExistText);
         return emailAddressAlreadyExistVisibleText.isDisplayed();
     }
-
 
 
     public void enterNameAndEmail(String name, String email) {
@@ -117,13 +117,22 @@ public class SignupPage {
     public void clickSignup() {
         driver.findElement(signupButton).click();
     }
+
     public void clickLogin() {
         driver.findElement(loginButton).click();
     }
 
-    public void clickContinue() { driver.findElement(continueButton).click(); }
-    public void clickDeleteAccount() { driver.findElement(deleteAccountButton).click(); }
-    public void clickLogout() { driver.findElement(logoutButton).click(); }
+    public void clickContinue() {
+        driver.findElement(continueButton).click();
+    }
+
+    public void clickDeleteAccount() {
+        driver.findElement(deleteAccountButton).click();
+    }
+
+    public void clickLogout() {
+        driver.findElement(logoutButton).click();
+    }
 
 
     public void enterAccountInformation(String password, String day, String month, String year) {
@@ -163,7 +172,7 @@ public class SignupPage {
         driver.findElement(mobileNumberField).sendKeys(mobileNumber);
     }
 
-    public void clickCreateAccount()  {
+    public void clickCreateAccount() {
         driver.findElement(createAccountButton).click();
     }
 }

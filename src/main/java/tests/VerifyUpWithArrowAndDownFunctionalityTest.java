@@ -6,13 +6,14 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
+import utils.AdUtils;
 import utils.ScrollUtils;
 
 
-public class VerifyScrollUpUsingArrowButtonAndScrollDownFunctionalityTest extends BaseTest {
+public class VerifyUpWithArrowAndDownFunctionalityTest extends BaseTest {
 
     @Test(priority = 25)
-    public void testVerifyScrollUpUsingArrowButtonAndScrollDownFunctionality() {
+    public void testVerifyUpWithArrowAndDownFunctionality() {
         try {
             HomePage homePage = new HomePage(getDriver());
 
@@ -21,6 +22,8 @@ public class VerifyScrollUpUsingArrowButtonAndScrollDownFunctionalityTest extend
 
             Thread.sleep(2000);
             ScrollUtils.scrollToFooter(getDriver());
+
+            AdUtils.detectAndHideAds(getDriver());
 
 
             Thread.sleep(2000);
@@ -31,7 +34,6 @@ public class VerifyScrollUpUsingArrowButtonAndScrollDownFunctionalityTest extend
 
 
             Assert.assertTrue(homePage.isFullFledgedPracticeWebsiteForAutomationEngineersTextVisible(), "Full-Fledged practice website for Automation Engineers");
-
 
 
             Thread.sleep(2000);
@@ -51,6 +53,8 @@ public class VerifyScrollUpUsingArrowButtonAndScrollDownFunctionalityTest extend
 
         }
     }
+
+
 }
 
 

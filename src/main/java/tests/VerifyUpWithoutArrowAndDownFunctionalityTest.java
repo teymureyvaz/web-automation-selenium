@@ -6,29 +6,38 @@ import org.openqa.selenium.TimeoutException;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import pages.SignupPage;
+import utils.AdUtils;
+import utils.ScrollUtils;
 
 
-public class LogoutUserTest extends BaseTest {
+public class VerifyUpWithoutArrowAndDownFunctionalityTest extends BaseTest {
 
-    @Test(priority = 4)
-    public void testLogoutUser() {
+    @Test(priority = 26)
+    public void testVerifyUpWithoutArrowAndDownFunctionality() {
         try {
-            HomePage homePage = new HomePage(driver);
-            SignupPage signupPage = new SignupPage(driver);
+            HomePage homePage = new HomePage(getDriver());
 
+            Thread.sleep(2000);
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
-            homePage.clickSignupLogin();
 
-            Assert.assertTrue(signupPage.isLoginToYourAccountVisible(), "Login to your account is not visible");
-            signupPage.enterEmailAndPassword("walterwhite@gmail.com", "12345678");
-            signupPage.clickLogin();
             Thread.sleep(2000);
-            Assert.assertTrue(signupPage.isLoggedInAsUserVisible(), "Logged in as user is not visible");
+            ScrollUtils.scrollToFooter(getDriver());
 
-            signupPage.clickLogout();
+            AdUtils.detectAndHideAds(getDriver());
+
+
             Thread.sleep(2000);
-            Assert.assertTrue(signupPage.isLoginToYourAccountVisible(), "Login to your account is not visible");
+            Assert.assertTrue(homePage.isSubscriptionTextVisible(), "Subscription is not visible");
+
+            Thread.sleep(2000);
+            ScrollUtils.scrollToTop(getDriver());
+
+
+            Assert.assertTrue(homePage.isFullFledgedPracticeWebsiteForAutomationEngineersTextVisible(), "Full-Fledged practice website for Automation Engineers");
+
+
+            Thread.sleep(2000);
+
 
         } catch (NoSuchElementException e) {
             System.out.println("Element not found: " + e.getMessage());
@@ -44,4 +53,9 @@ public class LogoutUserTest extends BaseTest {
 
         }
     }
+
+
 }
+
+
+

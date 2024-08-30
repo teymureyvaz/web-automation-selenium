@@ -1,14 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
+import utils.SeleniumHelperUtils;
 
 public class HomePage {
 
@@ -27,6 +23,8 @@ public class HomePage {
     private final By viewArrowButton = By.xpath("//button[@id='subscribe']");
 
     private final By youHaveBeenSuccessfullySubscribedText = By.xpath("//div[@class='alert-success alert' and text()='You have been successfully subscribed!']");
+    private final By viewUpwardArrowButton = By.xpath("//a[@id='scrollUp']");
+    private final By fullFledgedPracticeWebsiteForAutomationEngineersText = By.xpath("//h2[text()='Full-Fledged practice website for Automation Engineers']");
 
 
     public HomePage(WebDriver driver) {
@@ -52,6 +50,13 @@ public class HomePage {
         WebElement youHaveBeenSuccessfullySubscribedTextVisible = driver.findElement(youHaveBeenSuccessfullySubscribedText);
         return youHaveBeenSuccessfullySubscribedTextVisible.isDisplayed();
     }
+
+    public boolean isFullFledgedPracticeWebsiteForAutomationEngineersTextVisible() {
+        WebElement fullFledgedPracticeWebsiteForAutomationEngineersTextVisible = driver.findElement(fullFledgedPracticeWebsiteForAutomationEngineersText);
+        SeleniumHelperUtils.waitForElementToBeVisible(driver, fullFledgedPracticeWebsiteForAutomationEngineersTextVisible);
+        return fullFledgedPracticeWebsiteForAutomationEngineersTextVisible.isDisplayed();
+    }
+
 
     public void clickSignupLogin() {
         driver.findElement(signupLoginButton).click();
@@ -82,15 +87,16 @@ public class HomePage {
     }
 
     public void clickYourEmailAddress() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.findElement(viewYourEmailAddress).click();
 
     }
 
     public void clickArrowButton() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.findElement(viewArrowButton).click();
+    }
 
+    public void clickUpwardArrowButton() {
+        driver.findElement(viewUpwardArrowButton).click();
     }
 
     public void addProductToCard(String productIndex) throws InterruptedException {
@@ -102,25 +108,6 @@ public class HomePage {
         productAddToCartButton.click();
     }
 
-
-    private final By viewUpwardArrowButton = By.xpath("//a[@id='scrollUp']");
-
-    public void clickUpwardArrowButton() {
-        driver.findElement(viewUpwardArrowButton).click();
-
-    }
-
-    private final By fullFledgedPracticeWebsiteForAutomationEngineersText = By.xpath("//h2[text()='Full-Fledged practice website for Automation Engineers']");
-
-    public boolean isFullFledgedPracticeWebsiteForAutomationEngineersTextVisible() {
-        WebElement fullFledgedPracticeWebsiteForAutomationEngineersTextVisible = driver.findElement(fullFledgedPracticeWebsiteForAutomationEngineersText);
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(fullFledgedPracticeWebsiteForAutomationEngineersText));
-
-
-        return fullFledgedPracticeWebsiteForAutomationEngineersTextVisible.isDisplayed();
-    }
 
 }
 
