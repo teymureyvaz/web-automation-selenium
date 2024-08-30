@@ -15,13 +15,13 @@ public class PlaceOrderTest extends BaseTest {
     @Test(priority = 14)
     public void testRegisterWhileCheckout() {
         try {
-            HomePage homePage = new HomePage(getDriver());
-            CartPage cartPage = new CartPage(getDriver());
-            SignupPage signupPage = new SignupPage(getDriver());
-            CheckoutPage checkoutPage = new CheckoutPage(getDriver());
-            PaymentPage paymentPage = new PaymentPage(getDriver());
+            HomePage homePage = new HomePage(driver);
+            CartPage cartPage = new CartPage(driver);
+            SignupPage signupPage = new SignupPage(driver);
+            CheckoutPage checkoutPage = new CheckoutPage(driver);
+            PaymentPage paymentPage = new PaymentPage(driver);
 
-            ScrollUtils.scrollTo(getDriver(), 600);
+            ScrollUtils.scrollTo(driver, 600);
 
 
             homePage.addProductToCard("1");
@@ -34,11 +34,11 @@ public class PlaceOrderTest extends BaseTest {
 
             Thread.sleep(3000);
 
-            ScrollUtils.scrollToTop(getDriver());
+            ScrollUtils.scrollToTop(driver);
             Thread.sleep(1000);
             homePage.clickCart();
 
-            String currentUrl = getDriver().getCurrentUrl();
+            String currentUrl = driver.getCurrentUrl();
             Assert.assertEquals(currentUrl, "https://automationexercise.com/view_cart", "Expected URL: " + "view_cart" + " but got: " + currentUrl);
 
             cartPage.clickProceedToCheckoutButton();
@@ -54,10 +54,12 @@ public class PlaceOrderTest extends BaseTest {
 
 
             signupPage.enterAccountInformation("1234567", "6", "5", "1996");
-            ScrollUtils.scrollTo(getDriver(), 500);
+
+            ScrollUtils.scrollTo(driver,500);
             signupPage.selectNewslettersAndOffers();
             signupPage.enterAddressDetails("Teymur", "Eyvzov", "ABB", "Rixard Zorge 12a", "", "Canada", "Baku", "Baku", "1000", "994775569147");
-            ScrollUtils.scrollTo(getDriver(), 200);
+            ScrollUtils.scrollTo(driver,200);
+          
             signupPage.clickCreateAccount();
             Assert.assertTrue(signupPage.isAccountCreatedVisible(), "Account Created text is not visible");
             Thread.sleep(2000);
@@ -179,10 +181,12 @@ public class PlaceOrderTest extends BaseTest {
             Assert.assertTrue(checkoutPage.isAddressListContains("Baku Baku 1000"), "Address line 2 is not present");
             Assert.assertTrue(checkoutPage.isAddressListContains("Canada"), "Address line 2 is not present");
 
-            ScrollUtils.scrollTo(getDriver(), 700);
+            ScrollUtils.scrollTo(driver, 700);
             Thread.sleep(1000);
             checkoutPage.enterMessage("Test");
-            ScrollUtils.scrollTo(getDriver(), 400);
+
+            ScrollUtils.scrollTo(driver,400);
+
             checkoutPage.clickPlaceOrderButton();
             Thread.sleep(1000);
 

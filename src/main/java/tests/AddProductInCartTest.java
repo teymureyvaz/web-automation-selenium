@@ -17,13 +17,13 @@ public class AddProductInCartTest extends BaseTest {
     @Test(priority = 12)
     public void testAddProductInCart() {
         try {
-            HomePage homePage = new HomePage(getDriver());
-            ProductsPage productsPage = new ProductsPage(getDriver());
-            CartPage cartPage = new CartPage(getDriver());
+            HomePage homePage = new HomePage(driver);
+            ProductsPage productsPage = new ProductsPage(driver);
+            CartPage cartPage = new CartPage(driver);
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
 
-            ScrollUtils.scrollTo(getDriver(),500);
+            ScrollUtils.scrollTo(driver,500);
 
             Thread.sleep(1000);
 

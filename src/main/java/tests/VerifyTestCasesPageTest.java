@@ -14,8 +14,8 @@ public class VerifyTestCasesPageTest extends BaseTest {
     @Test(priority = 7)
     public void testVerifyTestCasesPage() {
         try {
-            HomePage homePage = new HomePage(getDriver());
-            TestCasesPage testCasesPage = new TestCasesPage(getDriver());
+            HomePage homePage = new HomePage(driver);
+            TestCasesPage testCasesPage = new TestCasesPage(driver);
 
             Assert.assertTrue(homePage.isHomePageVisible(), "Home page is not visible");
             homePage.clickTestCases();
